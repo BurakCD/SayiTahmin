@@ -46,64 +46,64 @@ public class GameActivity extends AppCompatActivity {
 
                 if (guessInput.getText().toString().equals("")){
                     Toast.makeText(GameActivity.this, "Boş bırakılamaz",Toast.LENGTH_SHORT).show();
-                }
+                }else {
+                    if (currentHealth == 1) {
+                        startActivity(new Intent(GameActivity.this, LoseActivity.class));
 
-                if (currentHealth ==1){
-                    startActivity(new Intent(GameActivity.this,LoseActivity.class));
+                        secretNumber = randomizer.nextInt(101);
 
-                    secretNumber = randomizer.nextInt(101);
+                        Log.e("Sayı", "" + secretNumber);
 
-                    Log.e("Sayı","" + secretNumber);
+                        winCounter = 0;
 
-                    winCounter=0;
+                        currentHealth = 11;
 
-                    currentHealth=11;
+                        remainedHearthText.setText("Kalan hakkınız: " + currentHealth);
 
-                    remainedHearthText.setText("Kalan hakkınız: " + currentHealth);
-
-                    increasedHealth.setText("Kazandığınız oyun başına artırılan can: " + winCounter);
-                }
-
-                if (Integer.parseInt(guessInput.getText().toString())<secretNumber){
-                    tipText.setText("Tahminin sayıdan küçük!");
-
-                    currentHealth--;
-
-                    remainedHearthText.setText("Kalan hakkınız: " + currentHealth);
-                }
-
-                if (Integer.parseInt(guessInput.getText().toString())>secretNumber){
-                    tipText.setText("Tahminin sayıdan büyük!");
-
-                    currentHealth--;
-
-                    remainedHearthText.setText("Kalan hakkınız: " + currentHealth);
-                }
-
-                if (Integer.parseInt(guessInput.getText().toString())==secretNumber){
-                    startActivity(new Intent(GameActivity.this, WinActivity.class));
-
-                    currentHealth = 10;
-
-                    winCounter++;
-
-                    if(winCounter>0){
-                        int numberToAdd = healthPerWin*winCounter;
-                        currentHealth +=numberToAdd;
+                        increasedHealth.setText("Kazandığınız oyun başına artırılan can: " + winCounter);
                     }
 
-                    if (currentHealth >20){
-                        currentHealth = 20;
+                    if (Integer.parseInt(guessInput.getText().toString()) < secretNumber) {
+                        tipText.setText("Tahminin sayıdan küçük!");
+
+                        currentHealth--;
+
+                        remainedHearthText.setText("Kalan hakkınız: " + currentHealth);
                     }
 
-                    remainedHearthText.setText("Kalan hakkınız: " + currentHealth);
+                    if (Integer.parseInt(guessInput.getText().toString()) > secretNumber) {
+                        tipText.setText("Tahminin sayıdan büyük!");
 
-                    increasedHealth.setText("Kazandığınız oyun başına artırılan can: " + winCounter);
+                        currentHealth--;
 
-                    secretNumber = randomizer.nextInt(101);
-                    Log.e("Sayı","" + secretNumber);
+                        remainedHearthText.setText("Kalan hakkınız: " + currentHealth);
+                    }
 
-                    guessInput.setText("");
+                    if (Integer.parseInt(guessInput.getText().toString()) == secretNumber) {
+                        startActivity(new Intent(GameActivity.this, WinActivity.class));
+
+                        currentHealth = 10;
+
+                        winCounter++;
+
+                        if (winCounter > 0) {
+                            int numberToAdd = healthPerWin * winCounter;
+                            currentHealth += numberToAdd;
+                        }
+
+                        if (currentHealth > 20) {
+                            currentHealth = 20;
+                        }
+
+                        remainedHearthText.setText("Kalan hakkınız: " + currentHealth);
+
+                        increasedHealth.setText("Kazandığınız oyun başına artırılan can: " + winCounter);
+
+                        secretNumber = randomizer.nextInt(101);
+                        Log.e("Sayı", "" + secretNumber);
+
+                        guessInput.setText("");
+                    }
                 }
             }
 
