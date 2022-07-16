@@ -102,9 +102,10 @@ public class GameActivity extends AppCompatActivity {
                         secretNumber = randomizer.nextInt(101);
                         Log.e("Sayı", "" + secretNumber);
 
-                        guessInput.setText("");
+
                     }
                 }
+                guessInput.setText(""); //onClick altına alarak, önceki tahminin silinmeme problemi çözüldü.
             }
 
         });
